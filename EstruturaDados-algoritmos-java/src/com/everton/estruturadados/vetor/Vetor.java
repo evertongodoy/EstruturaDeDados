@@ -31,6 +31,9 @@ public class Vetor {
 	
 	// Segundo modo - Melhorado para nao percorrer todo o Array
 	public Boolean adiciona(String elemento) {
+		
+		this.aumentaCapacidade();
+		
 		if (this.tamanho < this.elementos.length) {
 			this.elementos[this.tamanho] = elemento;
 			this.tamanho++;
@@ -48,6 +51,8 @@ public class Vetor {
 			throw new IllegalArgumentException("Posicao Invalida");
 		}
 		
+		this.aumentaCapacidade();
+		
 		// Iterando o vetor de tras p frente // Mover todos elemebtos
 		for(int i = this.tamanho; i >= posicao; i--) { // Foi visto que movia do tamanho ate a posicao
 			this.elementos[i+1] = this.elementos[i];
@@ -59,6 +64,18 @@ public class Vetor {
 		
 		return true;
 	}
+	
+	
+	private void aumentaCapacidade() {
+		if(this.tamanho == this.elementos.length) {
+			String[] elementosNovos = new String[this.elementos.length*2]; // Melhor forma de dobrar a capacidade do vetor eh dobrar
+			for(int i=0; i < this.elementos.length; i++) {
+				elementosNovos[i] = this.elementos[i];
+			}
+			this.elementos = elementosNovos;
+		}
+	}
+	
 	
 	
 	public int getTamanho() {
