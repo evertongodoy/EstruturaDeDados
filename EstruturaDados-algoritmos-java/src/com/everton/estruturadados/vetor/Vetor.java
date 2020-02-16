@@ -38,7 +38,29 @@ public class Vetor {
 		}
 		return false;
 	}
-
+    
+	
+	
+	// Aula07 - Add Elemento em qualquer lugar - Overload - Sobrecarga
+	public Boolean adiciona(int posicao, String elemento) {
+		
+		if(! (posicao >=0 && posicao < this.tamanho) ){
+			throw new IllegalArgumentException("Posicao Invalida");
+		}
+		
+		// Iterando o vetor de tras p frente // Mover todos elemebtos
+		for(int i = this.tamanho; i >= posicao; i--) { // Foi visto que movia do tamanho ate a posicao
+			this.elementos[i+1] = this.elementos[i];
+		}
+		
+		
+		this.elementos[posicao] = elemento;
+		this.tamanho++;
+		
+		return true;
+	}
+	
+	
 	public int getTamanho() {
 		return this.tamanho;
 	}
@@ -66,6 +88,27 @@ public class Vetor {
 		s.append("]");
 		
 		return s.toString();   // Arrays.toString(elementos);
+	}
+	
+	
+	// Aula 05 - Metodo de Busca
+	public String busca(int posicao) {
+		if(! (posicao >=0 && posicao < this.tamanho) ){
+			throw new IllegalArgumentException("Posicao Invalida");
+		}
+		return this.elementos[posicao];
+	}
+	
+	
+	// Aula06 - Verificar se um elemento existe
+	public int busca(String elemento) {
+		// Algoritimo de Busca Sequencial
+		for(int i = 0; i < this.tamanho; i++) {
+			if(this.elementos[i].equalsIgnoreCase(elemento)) {  // String eh um objeto, nao podemos usar == e sim EQUALS
+				return i;
+			}
+		}
+		return -1;
 	}
 	
 }
